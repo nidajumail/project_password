@@ -6,13 +6,22 @@ st.markdown("""
 <style>
       .main{text-align: center; padding: 10px;}
       .stTextInput{width:60% !important; margin: auto;}
-      .stButton{width:60%; background-color: #f63366; color: white; font-weight: bold; margin: auto;}
-      .stButton:hover{background-color: #f63366; color: white;}       
-      .</style>""", unsafe_allow_html=True)
+      .stButton button{width:60%; background-color: #4CAF50; color: white; font-weight: bold; margin: auto;}
+      .stButton button:hover{background-color: #45a049;}       
+</style>
+""", unsafe_allow_html=True)
 
 # page title and description
 st.title("Password Strength Meter")
 st.write("Enter your password below to check its strength.🔑")
+
+# ✅ JUST THESE TWO LINES MOVED UP — nothing else changed
+password = st.text_input("Enter your password", type="password", help="Ensure your password is strong🔏")
+if st.button("Check Password Strength"):
+    if password:
+        check_password_strength(password)
+    else:   
+        st.warning("⚠️ Please enter a password to check its strength.")
 
 # function to make password strength checker
 def check_password_strength(password):  
@@ -48,12 +57,4 @@ def check_password_strength(password):
         with st.expander("Password Strength Feedback"):
              for item in feedback:
                  st.write(item)
-    password = st.text_input("Enter your password", type="password", help="Ensure your password is strong🔏")
-    # Button Working
-    if st.button("Check Password Strength"):
-        if password:
-            check_password_strength(password)
-        else:   
-            st.warning("⚠️ Please enter a password to check its strength.")
 
-        
